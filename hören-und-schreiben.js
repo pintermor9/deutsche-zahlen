@@ -5,9 +5,15 @@ var play_button = document.getElementById("play");
 var input = document.getElementById("numberInput");
 var feedback = document.getElementById("feedback");
 
+input.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") {
+    check();
+  }
+});
+
 function generate_new() {
   number = Math.round(Math.random() * MAX_NUM);
-  console.log(number);
+  console.log("current number: " + number);
 
   play_button.disabled = true;
   tts(number);
@@ -31,8 +37,9 @@ function check() {
 
 function tts(text) {
   number_audio = new Audio("https://utils.pintermor9.repl.co/tts?text=" + text);
-  number_audio.addEventListener("loadeddata", () => {
+  number_audio.addEventListener("canplaythrough", () => {
     play_button.disabled = false;
+    number_audio.play();
   });
 }
 
