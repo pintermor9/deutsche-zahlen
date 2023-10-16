@@ -9,6 +9,22 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <script defer src="hören-und-schreiben.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    .field {
+      display: inline;
+    }
+
+    .field input {
+      font-size: 2em;
+      width: 1em;
+      height: 1.5em;
+      text-align: center;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      font-weight: 400;
+      margin: 0.25rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,11 +32,19 @@
     <h1 class="mt-5">Zahlen Hören und Schreiben</h1>
     <div class="form-group">
       <label for="numberInput" class="mt-2">Nummer:</label>
-      <input type="text" class="form-control" id="numberInput" name="numberInput">
+      <div class="field" id="field-example" hidden><input minlength="1" maxlength="1" type="text" lang="en" autocomplete="off" oninput="go_to_next_input(this.dataset.index)"></div>
+      <div class="inputs">
+        <!-- Here js puts #field-example s -->
+      </div>
     </div>
-    <button class="btn btn-primary" id="play" onclick="play()">sprechen</button>
+    <button class="btn btn-primary" id="play" onclick="play()">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      sprechen</button>
     <button class="btn btn-success" onclick="check()">Überprüfen</button>
+    <button class="btn btn-primary" onclick="generate_new()">skip</button>
     <p class="mt-3" id="feedback"></p>
+
+    <input type="number" oninput="MAX_NUM = this.value">
   </div>
 </body>
 
